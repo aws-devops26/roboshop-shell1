@@ -7,7 +7,8 @@ N="\e[0m"
 MONGODB_HOST=mongodb.awssrivalli.online
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
-echo "script started executing at $TIMESTAMP " &>> $LOGFILE
+echo -e "$Y script started executing at $N $TIMESTAMP " &>> $LOGFILE
+
 VALIDATE() {
     if [ $1 -ne 0 ]
     then
@@ -33,17 +34,24 @@ VALIDATE $? " enabiling nodejs:18 "
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? " installing node js "
 
-useradd roboshop &>> $LOGFILE
-VALIDATE $? "adding user roboshop"
+id roboshop
+if [ $? -ne 0 ]
+then
+    useradd roboshop &>> $LOGFILE
+    VALIDATE $? "adding user roboshop"
+else
+    echo -e " $G roboshop user already exist SKIPPING $N "
+fi
 
-mkdir /app &>> $LOGFILE
+
+mkdir -p /app &>> $LOGFILE
 VALIDATE $? " created app directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
 VALIDATE $? " downloading catalouge application"
 
 cd /app 
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 VALIDATE $? " unzipping catalouge"
 
 npm install  &>> $LOGFILE
