@@ -75,5 +75,5 @@ VALIDATE $? "copying mongodb repo"
 dnf install mongodb-org-shell -y &>> $LOGFILE
 VALIDATE $? " installing mongodb client"
 
-mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> LOGFILE
+mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
 VALIDATE $? "loading catalogue data into mongodb"
