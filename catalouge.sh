@@ -40,7 +40,7 @@ then
     useradd roboshop &>> $LOGFILE
     VALIDATE $? "adding user roboshop"
 else
-    echo -e " $G roboshop user already exist SKIPPING $N "
+    echo -e " $G roboshop user already exist $Y SKIPPING $N "
 fi
 
 
