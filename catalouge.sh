@@ -41,7 +41,7 @@ unzip /tmp/catalogue.zip &>> $LOGFILE
 VALIDATE $? " unzipping catalouge"
 npm install  &>> $LOGFILE
 VALIDATE $? " installing dependencies"
-cp C:/devops/repos/roboshop-shell1/catalogue.service /etc/systemd/system/catalogue.service
+cp /devops/repos/roboshop-shell1/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? " copying catalouge service "
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? " catalouge demon reload"
@@ -49,7 +49,7 @@ systemctl enable catalouge &>> $LOGFILE
 VALIDATE $? " catalouge enabiling "
 systemctl start catalouge &>> $LOGFILE
 VALIDATE $? " catalouge start"
-cp C:/devops/repos/roboshop-shell1/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /devops/repos/roboshop-shell1/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? " copying mongodb repo"
 dnf install mongodb-org-shell -y &>> $LOGFILE
 VALIDATE $? " installing mongodb client"
