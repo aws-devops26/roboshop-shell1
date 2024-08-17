@@ -44,7 +44,7 @@ VALIDATE $? "Download the frontend content"
 cd /usr/share/nginx/html &>> $LOGFILE
 VALIDATE $? "Extract the frontend content"
 
-unzip /tmp/web.zip &>> $LOGFILE
+unzip -o /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "Extract the frontend content"
 
 cp /home/centos/roboshop-shell1/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
