@@ -77,8 +77,3 @@ VALIDATE $? " installing mongodb client"
 
 mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> LOGFILE
 VALIDATE $? "loading catalogue data into mongodb"
-
-
-
-
-
