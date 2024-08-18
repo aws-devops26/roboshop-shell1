@@ -5,8 +5,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 MONGODB_HOST=mongodb.awssrivalli.online
-TIMESTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-$TIMESTAMP.log"
+TIMESTAMP=$(date +%F-%H-%M="/tmp/$0-$TIMESTAMP.log"
 exec &>$LOGFILE
 echo -e "$Y script started executing at $N $TIMESTAMP " &>> $LOGFILE
 
@@ -27,20 +26,20 @@ else
     echo -e " $G u r root user $N "
 fi
 
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  &>> $LOGFILE
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  
 VALIDATE $? "installing remi release"
 
-dnf module enable redis:remi-6.2 -y &>> $LOGFILE
+dnf module enable redis:remi-6.2 -y 
 VALIDATE $? " enabiling redis "
 
-dnf install redis -y &>> $LOGFILE
+dnf install redis -y 
 VALIDATE $? " installing redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf  &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf  
 VALIDATE $? " editing remote access to redis"
 
-systemctl enable redis &>> $LOGFILE
+systemctl enable redis 
 VALIDATE $? " redis enabiling "
 
-systemctl start redis &>> $LOGFILE
+systemctl start redis 
 VALIDATE $? " redis starting"
