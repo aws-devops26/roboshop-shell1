@@ -5,7 +5,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 MONGODB_HOST=mongodb.awssrivalli.online
-TIMESTAMP=$(date +%F-%H-%M="/tmp/$0-$TIMESTAMP.log"
+TIMESTAMP=$(date +%F-%H-%M)
+LOGFILE="/tmp/$0-$TIMESTAMP.log"
 exec &>$LOGFILE
 echo -e "$Y script started executing at $N $TIMESTAMP " &>> $LOGFILE
 
