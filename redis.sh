@@ -7,6 +7,7 @@ N="\e[0m"
 MONGODB_HOST=mongodb.awssrivalli.online
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
+exec &>$LOGFILE
 echo -e "$Y script started executing at $N $TIMESTAMP " &>> $LOGFILE
 
 VALIDATE() {
@@ -23,7 +24,7 @@ then
     echo -e " $R ERROR:: please run eith root access $N "
     exit 1
 else
-    echo -e " $G u r root use $N "
+    echo -e " $G u r root user $N "
 fi
 
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  &>> $LOGFILE
