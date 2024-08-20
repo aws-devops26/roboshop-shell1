@@ -4,7 +4,6 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGODB_HOST=mongodb.awssrivalli.online
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 echo -e "$Y script started executing at $N $TIMESTAMP " &>> $LOGFILE
@@ -27,22 +26,24 @@ else
 
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
-VALIDATE $? " downloading erlang script"
+VALIDATE $? " downloading erlang script" &>> $LOGFILE
+
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
-VALIDATE $? "downloading rabbitmq script"
+VALIDATE $? "downloading rabbitmq script" &>> $LOGFILE
 
-dnf install rabbitmq-server -y 
+
+dnf install rabbitmq-server -y &>> $LOGFILE
 VALIDATE $? "installing rabbitmq server"
 
-systemctl enable rabbitmq-server 
+systemctl enable rabbitmq-server &>> $LOGFILE
 VALIDATE $? "enabiling rabbitmq server"
 
-systemctl start rabbitmq-server
+systemctl start rabbitmq-server &>> $LOGFILE
 VALIDATE $? "starting rabbitmq server"
 
-rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
 VALIDATE $? "adding user roboshop,roboshop123"
 
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 VALIDATE $? "setting permission"
