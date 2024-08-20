@@ -50,7 +50,7 @@ unzip -o /tmp/payment.zip &>> $LOGFILE
 VALIDATE $? " unzipping payment"
 
 pip3.6 install -r requirements.txt &>> $LOGFILE
-VALIDATE
+VALIDATE $? " installing pip3.6"
 
 cp payment.service /etc/systemd/system/payment.service &>> $LOGFILE
 VALIDATE $? " copying payment service "
