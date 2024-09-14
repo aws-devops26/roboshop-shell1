@@ -3,6 +3,7 @@ AMI=ami-0b4f379183e5706b9
 SG_ID=sg-0541e7f1344e449e2
 INSTANCES=("mongodb" "redis" "rabbitmq" "mysql" "catalogue" "user" "cart" 
 "shipping" "payment" "dispatch" "web")
+ZONE_ID=Z025434420MOIOXIRVMIF
 DOMAIN_NAME="awssrivalli.online"
 for i in "${INSTANCES[@]}"
 do
@@ -20,7 +21,7 @@ do
 
   #creating r53 record make sure delete exisisting record
   aws route53 change-resource-record-sets \
-  --hosted-zone-id Z025434420MOIOXIRVMIF \
+  --hosted-zone-id $ZONE_ID \
   --change-batch '
   {
     "Comment": "Creating a record set for cognito endpoint"
@@ -38,3 +39,4 @@ do
   } 
     '
 done
+
